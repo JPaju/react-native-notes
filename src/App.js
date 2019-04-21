@@ -6,12 +6,18 @@ import NotesList from './components/NotesList'
 import NoteAddBar from './components/NoteAddBar'
 
 export default class App extends React.Component {
-  state = { notes }
+  constructor(props) {
+    super(props)
+    this.state = {
+      notes: noteList
+    }
+  }
 
   render() {
+    console.log(this.state.notes)
     return (
       <View style={styles.container}>
-        <NotesList styles={styles} notes={notes} />
+        <NotesList styles={styles} notes={this.state.notes} />
         {moveToBottom(
           <NoteAddBar styles={styles} onSubmit={this.addNote} />
         )}
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const notes = [
+const noteList = [
   {
     id: 0,
     content: 'HTML on helppoa'
