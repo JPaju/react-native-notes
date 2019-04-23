@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
+import styles from './styles'
 
 import NotesList from './components/NotesList'
 import NoteAddBar from './components/NoteAddBar'
@@ -30,35 +31,6 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 5,
-    marginTop: 25,
-    backgroundColor: '#fff',
-  },
-  notesList: {
-    margin: 5,
-    alignItems: 'flex-start',
-  },
-  note: {
-    fontSize: 20,
-    color: '#008080',
-    paddingVertical: 30
-  },
-  noteInputContainer: {
-    padding: 5,
-    borderColor: 'black',
-    borderWidth: 2,
-  },
-  buttonContainer: {
-    paddingVertical: 5
-  },
-  noteInput: {
-    fontSize: 20,
-  }
-})
-
 const noteList = [
   {
     id: 0,
@@ -87,5 +59,9 @@ const noteList = [
   {
     id: 7,
     content: 'Tämä on turha muistiinpano'
+  },
+  {
+    id: 8,
+    content: 'Turhan muistiinpanon jälkeinen muistiinpano, joka varmistaa, että kaikki muistiinpanot eivät mahdu samalle ruudulle.'
   }
 ]
