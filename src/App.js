@@ -1,6 +1,7 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Alert } from 'react-native'
 import styles from './styles'
+import { validateNote } from './utils'
 
 import NotesList from './components/NotesList'
 import NoteAddBar from './components/NoteAddBar'
@@ -9,7 +10,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      notes: noteList
+      notes: noteList,
+      noteToAdd: ''
     }
   }
 
@@ -17,18 +19,50 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <NotesList styles={styles} notes={this.state.notes} />
-        <NoteAddBar styles={styles} onSubmit={this.addNote} />
+        <NoteAddBar
+          styles={styles}
+          onSubmit={this.onNewNoteSubmit}
+          onChange={this.onNewNoteChangeText}
+          newNote={this.state.noteToAdd}
+        />
       </View>
     )
   }
 
   addNote = (text) => {
+    try {
+      validateNote(text, this.state.notes)
+    } catch (error) {
+      Alert.alert(
+        'Adding new note failed',
+        error.message || 'Reason unknown',
+        [
+          {
+            text: 'Discard note',
+            onPress: () => this.setState({ noteToAdd: '' }),
+            style: 'cancel',
+          },
+          { text: 'Modify note' },
+        ],
+        { cancelable: false }
+      )
+      return
+    }
+
     const newNotes = this.state.notes.concat({
       id: this.state.notes.length + 1,
       content: text
     })
-    this.setState({ notes: newNotes })
+
+    this.setState({
+      notes: newNotes,
+      noteToAdd: ''
+    })
   }
+
+  onNewNoteChangeText = changedNote => this.setState({ noteToAdd: changedNote })
+
+  onNewNoteSubmit = () => this.addNote(this.state.noteToAdd)
 }
 
 const noteList = [
