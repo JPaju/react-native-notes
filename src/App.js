@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { moveToBottom } from './utils'
+import { StyleSheet, View } from 'react-native'
 
 import NotesList from './components/NotesList'
 import NoteAddBar from './components/NoteAddBar'
@@ -14,20 +13,17 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.notes)
     return (
       <View style={styles.container}>
         <NotesList styles={styles} notes={this.state.notes} />
-        {moveToBottom(
-          <NoteAddBar styles={styles} onSubmit={this.addNote} />
-        )}
+        <NoteAddBar styles={styles} onSubmit={this.addNote} />
       </View>
     )
   }
 
   addNote = (text) => {
     const newNotes = this.state.notes.concat({
-      id: notes.length + 1,
+      id: this.state.notes.length + 1,
       content: text
     })
     this.setState({ notes: newNotes })
@@ -46,9 +42,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   note: {
-    fontSize: 15,
+    fontSize: 20,
     color: '#008080',
-    paddingVertical: 5
+    paddingVertical: 30
   },
   noteInputContainer: {
     padding: 5,
@@ -84,4 +80,12 @@ const noteList = [
     id: 5,
     content: 'React Nativen listat on kummallisia'
   },
+  {
+    id: 6,
+    content: 'Scrollaaminen on myös outoa'
+  },
+  {
+    id: 7,
+    content: 'Tämä on turha muistiinpano'
+  }
 ]

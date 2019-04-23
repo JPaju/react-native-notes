@@ -13,6 +13,4 @@ const moveToBottom = (component) => {
     )
 }
 
-module.exports = {
-    moveToBottom
-}
+export { moveToBottom }

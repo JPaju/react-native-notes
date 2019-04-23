@@ -1,25 +1,19 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import Note from './Note'
 
 
-export default class NotesList extends React.Component {
-    render = () => {
-        const { styles, notes } = this.props
-        return (
-            <View style={styles.notesList}>
-                <FlatList
-                    data={notes}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={({ item: note }) =>
-                        <Note
-                            styles={styles}
-                            content={note.content}
-                        />
-                    }
+export default NotesList = ({ styles, notes }) => {
+    return (
+        <ScrollView contentContainerStyle={styles.notesList}>
+            {notes.map(note =>
+                <Note
+                    styles={styles}
+                    content={note.content}
+                    key={note.id}
                 />
-            </View>
-        )
-    }
+            )}
+        </ScrollView>
+    )
 }
