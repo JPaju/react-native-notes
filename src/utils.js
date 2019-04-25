@@ -1,4 +1,4 @@
-const validateNote = (noteContent, noteList, maxChars = 40) => {
+const validateNote = (noteContent, noteList, maxChars = 120) => {
 
     if (!(/[a-zA-Z]|\d/.test(noteContent.toString())))
         throw new Error('Note must contain at least one character')

@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 
 import NoteAddView from '../views/NoteAddView'
 import NotesView from '../views/NotesView'
@@ -30,7 +30,7 @@ AdminStack.navigationOptions = {
     tabBarLabel: 'Admin',
 }
 
-export default createBottomTabNavigator(
+export default createAppContainer(createBottomTabNavigator(
     {
         NoteList: NoteListStack,
         NoteAdd: NoteAddStack,
@@ -40,12 +40,12 @@ export default createBottomTabNavigator(
         tabBarOptions: {
             showIcon: false,
             labelStyle: {
-                textAlign: 'center',
-                alignSelf: 'center',
-                flex: 1,
                 fontSize: 20,
                 color: 'red',
+            },
+            style: {
+                alignItems: 'center',
             }
         }
-    }
+    })
 )
