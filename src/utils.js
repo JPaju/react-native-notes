@@ -1,19 +1,5 @@
-import React from 'react'
-import { View } from 'react-native'
-
-const moveToBottom = (component) => {
-    return (
-        <View style={{
-            flex: 1,
-            justifyContent: 'flex-end',
-            marginBottom: 5
-        }}>
-            {component}
-        </View>
-    )
-}
-
 const validateNote = (noteContent, noteList, maxChars = 40) => {
+
     if (!(/[a-zA-Z]|\d/.test(noteContent.toString())))
         throw new Error('Note must contain at least one character')
 
@@ -22,6 +8,11 @@ const validateNote = (noteContent, noteList, maxChars = 40) => {
 
     if (noteContent.toString().length > maxChars)
         throw new Error(`Maximum of ${maxChars} characters is allowed!`)
+
+    return {
+        id: noteList.length + 1,
+        content: noteContent
+    }
 }
 
 const isDuplicateNote = (noteContent, noteList) => {
@@ -32,7 +23,6 @@ const isDuplicateNote = (noteContent, noteList) => {
 }
 
 export {
-    moveToBottom,
     isDuplicateNote,
     validateNote
 }
